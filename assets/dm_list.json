@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "section": "Decision Making",
+    "name": "XAT 2017",
+    "description": "Attempt XAT 2017 questions and solutions of Decision Making section",
+    "image": "xat2017.png"
+  },
+  {
+    "id": "2",
+    "section": "Decision Making",
+    "name": "XAT 2018",
+    "description": "Attempt XAT 2018 questions and solutions of Decision Making section",
+    "image": "xat-2018.jpg"
+  },
+  {
+    "id": "3",
+    "section": "Decision Making",
+    "name": "XAT 2019",
+    "description": "Attempt XAT 2019 questions and solutions of Decision Making section",
+    "image": "xat-2019.jpg"
+  }
+]
