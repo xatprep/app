@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
         // This is the theme of your application.
         primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false,
       home: MyHomePage(title: 'Welcome to XATprep'),
     );
   }
@@ -76,7 +77,6 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Container(
               height: 180.0,
-              padding: EdgeInsets.all(0.0),
               margin: EdgeInsets.only(left:0.0, bottom: 5.0),
               child: Card(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0),),
@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: <Widget>[
                           Center(
                             child:Container(
-                              margin: EdgeInsets.only(top:4.0),
+                              padding: const EdgeInsets.only(left:10.0, top:10.0),
                               height: 70.0,
                               width: MediaQuery.of(context).size.width*0.8,
                               child: Text("Focus your preparation for Decision Making and GK sections for XAT 2020 with XATprep", style: TextStyle(fontSize: 16.0, height: 1.6, fontFamily: 'Roboto', color: Colors.black),),
@@ -116,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
               height: 225.0,
-//              margin: EdgeInsets.only(left:0.0, bottom: 5.0, top: 5.0),
+              margin: EdgeInsets.only(left:0.0, bottom: 5.0),
               child: Card(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0),),
                 color: Colors.white,
@@ -149,19 +149,42 @@ class _MyHomePageState extends State<MyHomePage> {
                                   scrollDirection: Axis.horizontal,
                                   itemCount:snapshot.data.length,
                                   itemBuilder: (BuildContext context, int index){
-                                    return new Container(
+                                    return GestureDetector(
+                                      onTap: (){
+                                          print("welcome to Decision Making section");
+                                          onCardTapped(1);
+                                        },
+                                      child: new Container(
 //                                      width: MediaQuery.of(context).size.width * 0.6,
-                                      width: 150.0,
-                                      margin: EdgeInsets.all(5.0),
-                                      color: Colors.yellow,
-                                      child: Container(
-                                        child: Center(child: Text(snapshot.data[index].name)),
+                                        width: 150.0,
+                                        margin: EdgeInsets.all(5.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.blue,
+                                            border: new Border.all(
+                                                width: 2.0,
+                                                style: BorderStyle.solid,
+                                                color: Colors.white,
+                                            ),
+                                            borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
+
+                                            gradient: new LinearGradient(
+                                                colors: [Colors.lightBlueAccent, Colors.blue],
+//                                              begin: Alignment.centerRight,
+//                                              end: new Alignment(-1.0, -1.0)
+                                                ),
+                                          ),
+                                          child: Center(child: Text(snapshot.data[index].name, style: TextStyle(fontSize: 18.0, color: Colors.white),)),
+                                        ),
                                       ),
                                     );
                                   },
                                 );
                               }else{
-                                return CircularProgressIndicator();
+                                return
+                                  Center(
+                                    child: CircularProgressIndicator(),
+                                  );
                               }
                             },
                           ),
@@ -173,120 +196,163 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Container(
-              height: 300.0,
-              padding: EdgeInsets.all(0.0),
+              height: 225.0,
               margin: EdgeInsets.only(left:0.0, bottom: 5.0),
               child: Card(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0),),
                 color: Colors.white,
                 elevation: 4.0,
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-                    height: MediaQuery.of(context).size.height * 0.35,
-
-                    child: FutureBuilder<List<Test>>(
-                      future: fetchTests(),
-                      builder: (context,snapshot){
-                        if(snapshot.hasData){
-                          return new ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount:snapshot.data.length,
-                            itemBuilder: (BuildContext context, int index){
-                              return new Container(
-                                width: MediaQuery.of(context).size.width * 0.6,
-                                child: Container(
-                                  child: Center(child: Text(snapshot.data[index].name)),
-                                ),
-                              );
-                            },
-                          );
-                        }else{
-                          return CircularProgressIndicator();
-                        }
-                      },
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            Container(
-              height: 160.0,
-              padding: EdgeInsets.all(0.0),
-              margin: EdgeInsets.only(left:0.0, bottom: 5.0),
-              child: Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0),),
-                color: Colors.white,
-                elevation: 4.0,
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.only(left:20.0, top:10.0),
                   child: Column(
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-//                          Container(
-//                            height: 100.0,
-//                            child: Image.asset('assets/images/gk.png'),
-//                          ),
                           Container(
-                            height: 100.0,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Container(child: Text("General Knowledge", style: TextStyle(fontSize: 22.0, fontFamily: 'Roboto', fontWeight: FontWeight.bold, height: 1.5),),),
-                                Expanded(child: Container(
-                                  margin: EdgeInsets.only(top:4.0),
-                                  width: 225.0,
-                                  child: Text("Ace your preparation for Decision Making and GK with XATprep.com", style: TextStyle(fontSize: 16.0, fontFamily: 'Roboto', color: Colors.black),),),),
-
-
-                              ],
-                            ),
+                            height: 50.0,
+                            child: Image.asset('assets/images/gk.png'),
                           ),
+                          Container(child: Text("General Knowledge", style: TextStyle(fontSize: 22.0, fontFamily: 'Roboto'),),),
+
                         ],
+                      ),
+                      Container(
+                        height: 125.0,
+                        margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
+                        child: Container(
+//                          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+                          margin: EdgeInsets.only(top: 5.0),
+                          child: FutureBuilder<List<Test>>(
+                            future: fetchTests(),
+                            builder: (context,snapshot){
+                              if(snapshot.hasData){
+                                return new ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount:snapshot.data.length,
+                                  itemBuilder: (BuildContext context, int index){
+                                    return new Container(
+//                                      width: MediaQuery.of(context).size.width * 0.6,
+                                      width: 150.0,
+                                      margin: EdgeInsets.all(5.0),
+                                      child: GestureDetector(
+                                        onTap: (){
+                                          print("welcome to GK section");
+                                          onCardTapped(2);
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.blue,
+                                            border: new Border.all(
+                                              width: 2.0,
+                                              style: BorderStyle.solid,
+                                              color: Colors.white,
+                                            ),
+                                            borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
+
+                                            gradient: new LinearGradient(
+                                              colors: [Colors.orangeAccent, Colors.orange],
+//                                              begin: Alignment.centerRight,
+//                                              end: new Alignment(-1.0, -1.0)
+                                            ),
+                                          ),
+                                          child: Center(child: Text(snapshot.data[index].name, style: TextStyle(fontSize: 18.0, color: Colors.white),)),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              }else{
+                                return
+                                  Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                              }
+                            },
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
             ),
-
             Container(
-              height: 150.0,
-              padding: EdgeInsets.all(0.0),
-              margin: EdgeInsets.only(left:0.0, bottom: 10.0),
+              height: 225.0,
+              margin: EdgeInsets.only(left:0.0, bottom: 5.0),
               child: Card(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0),),
                 color: Colors.white,
                 elevation: 4.0,
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.only(left:20.0, top:10.0),
                   child: Column(
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-//                          Container(
-//                            height: 100.0,
-//                            child: Image.asset('assets/images/about.png'),
-//                          ),
                           Container(
-                            height: 100.0,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Container(child: Text("Forum", style: TextStyle(fontSize: 22.0, fontFamily: 'Roboto', fontWeight: FontWeight.bold, height: 1.5),),),
-                                Expanded(child: Container(
-                                  margin: EdgeInsets.only(top:4.0),
-                                  width: 225.0,
-                                  child: Text("Ace your preparation for Decision Making and GK with XATprep.com", style: TextStyle(fontSize: 16.0, fontFamily: 'Roboto', color: Colors.black),),),),
-
-
-                              ],
-                            ),
+                            height: 50.0,
+                            child: Image.asset('assets/images/forum.png'),
                           ),
+                          Container(child: Text("Forum", style: TextStyle(fontSize: 22.0, fontFamily: 'Roboto'),),),
+
                         ],
+                      ),
+                      Container(
+                        height: 125.0,
+                        margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
+                        child: Container(
+//                          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+                          margin: EdgeInsets.only(top: 5.0),
+                          child: FutureBuilder<List<Test>>(
+                            future: fetchTests(),
+                            builder: (context,snapshot){
+                              if(snapshot.hasData){
+                                return new ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount:snapshot.data.length,
+                                  itemBuilder: (BuildContext context, int index){
+                                    return new Container(
+//                                      width: MediaQuery.of(context).size.width * 0.6,
+                                      width: 150.0,
+                                      margin: EdgeInsets.all(5.0),
+                                      child: GestureDetector(
+                                        onTap: (){
+                                          print("welcome to Forum section");
+                                          onCardTapped(3);
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                          color: Colors.blue,
+                                          border: new Border.all(
+                                            width: 2.0,
+                                            style: BorderStyle.solid,
+                                            color: Colors.white,
+                                          ),
+                                          borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
+
+                                          gradient: new LinearGradient(
+                                            colors: [Colors.grey, Colors.blueGrey],
+//                                              begin: Alignment.centerRight,
+//                                              end: new Alignment(-1.0, -1.0)
+                                          ),
+                                        ),
+                                        child: Center(
+                                            child: Text(snapshot.data[index].name, style: TextStyle(fontSize: 18.0, color: Colors.black),)
+                                        ),
+                                      ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              }else{
+                                return
+                                  Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                              }
+                            },
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -298,7 +364,90 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       }
       case 1:{
-        return Text("Welcome to Decision Making", style: TextStyle(fontFamily: 'Roboto', color: Colors.grey, fontSize: 24.0, fontWeight: FontWeight.normal));
+        return ListView(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.only(left:0.0, bottom: 5.0),
+              child: Card(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0),),
+                color: Colors.white,
+                elevation: 4.0,
+                child: Padding(
+                  padding: const EdgeInsets.only(left:20.0, top:10.0),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            height: 50.0,
+                            child: Image.asset('assets/images/decision_making.png'),
+                          ),
+                          Container(child: Text("Decision Making", style: TextStyle(fontSize: 22.0, fontFamily: 'Roboto'),),),
+
+                        ],
+                      ),
+                      Container(
+                        height: 125.0,
+                        margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
+                        child: Container(
+//                          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+                          margin: EdgeInsets.only(top: 5.0),
+                          child: FutureBuilder<List<Test>>(
+                            future: fetchTests(),
+                            builder: (context,snapshot){
+                              if(snapshot.hasData){
+                                return new ListView.builder(
+                                  itemCount:snapshot.data.length,
+                                  itemBuilder: (BuildContext context, int index){
+                                    return GestureDetector(
+                                      onTap: (){
+                                        print("welcome to Decision Making section");
+                                        onCardTapped(1);
+                                      },
+                                      child: new Container(
+//                                      width: MediaQuery.of(context).size.width * 0.6,
+                                        width: 150.0,
+                                        margin: EdgeInsets.all(5.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.blue,
+                                            border: new Border.all(
+                                              width: 2.0,
+                                              style: BorderStyle.solid,
+                                              color: Colors.white,
+                                            ),
+                                            borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
+
+                                            gradient: new LinearGradient(
+                                              colors: [Colors.lightBlueAccent, Colors.blue],
+//                                              begin: Alignment.centerRight,
+//                                              end: new Alignment(-1.0, -1.0)
+                                            ),
+                                          ),
+                                          child: Center(child: Text(snapshot.data[index].name, style: TextStyle(fontSize: 18.0, color: Colors.white),)),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              }else{
+                                return
+                                  Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+          ],
+        );
       }
       case 2:{
         return Text("Welcome to GK", style: TextStyle(fontFamily: 'Roboto', fontSize: 24.0, fontWeight: FontWeight.normal));
@@ -318,7 +467,7 @@ class _MyHomePageState extends State<MyHomePage> {
     print(response.body);
     if (response.statusCode == 200) {
       // If server returns an OK response, parse the JSON.
-
+      print(response.body);
       Iterable list = json.decode(response.body);
       var tests = new List<Test>();
       tests = list.map((model) => Test.fromJson(model)).toList();
@@ -331,6 +480,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
+
+  void onCardTapped(int index) {
     setState(() {
       selectedIndex = index;
     });

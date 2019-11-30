@@ -49,6 +49,7 @@ flutter:
     - assets/images/about.png
     - assets/images/decision_making.png
     - assets/images/gk.png
+    - assets/images/forum.png
 
   fonts:
     - family: Roboto
