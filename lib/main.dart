@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
         return ListView(
           children: <Widget>[
             Container(
-              height: 160.0,
+              height: 180.0,
               padding: EdgeInsets.all(0.0),
               margin: EdgeInsets.only(left:0.0, bottom: 5.0),
               child: Card(
@@ -102,27 +102,67 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-//                          Container(
-//                            height: 100.0,
-//                            child: Image.asset('assets/images/about.png'),
-//                          ),
                           Container(
-                            height: 100.0,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Container(child: Text("About", style: TextStyle(fontSize: 22.0, fontFamily: 'Roboto', fontWeight: FontWeight.bold, height: 1.5),),),
-                                Expanded(child: Container(
-                                  margin: EdgeInsets.only(top:4.0),
-                                  width: 225.0,
-                                  child: Text("Ace your preparation for Decision Making and GK with XATprep.com", style: TextStyle(fontSize: 16.0, fontFamily: 'Roboto', color: Colors.black),),),),
-
-
-                              ],
-                            ),
+                            height: 50.0,
+                            child: Image.asset('assets/images/about.png'),
                           ),
+                          Container(child: Text("About", style: TextStyle(fontSize: 22.0, fontFamily: 'Roboto'),),),
+
                         ],
                       ),
+                      Row(
+                        children: <Widget>[
+                          Center(
+                            child:Container(
+                              margin: EdgeInsets.only(top:4.0),
+                              height: 70.0,
+                              width: MediaQuery.of(context).size.width*0.8,
+                              child: Text("Focus your preparation for Decision Making and GK sections for XAT 2020 with XATprep", style: TextStyle(fontSize: 16.0, height: 1.6, fontFamily: 'Roboto', color: Colors.black),),
+                            ),
+                          ),
+
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              height: 180.0,
+              padding: EdgeInsets.all(0.0),
+              margin: EdgeInsets.only(left:0.0, bottom: 5.0),
+              child: Card(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0),),
+                color: Colors.white,
+                elevation: 4.0,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            height: 50.0,
+                            child: Image.asset('assets/images/decision_making.png'),
+                          ),
+                          Container(child: Text("Decision Making", style: TextStyle(fontSize: 22.0, fontFamily: 'Roboto'),),),
+
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Center(
+                            child:Container(
+                              margin: EdgeInsets.only(top:4.0),
+                              height: 70.0,
+                              width: MediaQuery.of(context).size.width*0.8,
+                              child: Text("Focus your preparation for Decision Making and GK sections for XAT 2020 with XATprep", style: TextStyle(fontSize: 16.0, height: 1.6, fontFamily: 'Roboto', color: Colors.black),),
+                            ),
+                          ),
+
+                        ],
+                      )
                     ],
                   ),
                 ),
@@ -146,13 +186,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       future: fetchTests(),
                       builder: (context,snapshot){
                         if(snapshot.hasData){
-//                           loaded = snapshot.data;
                           return new ListView.builder(
                             scrollDirection: Axis.horizontal,
-//                            itemCount: loaded.length,
                             itemCount:snapshot.data.length,
                             itemBuilder: (BuildContext context, int index){
-                              //var db_object = db_objects[index];
                               return new Container(
                                 width: MediaQuery.of(context).size.width * 0.6,
                                 child: Container(
@@ -164,66 +201,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         }else{
                           return CircularProgressIndicator();
                         }
-                        //var db_objects = json.decode(snapshot.data.toString());
-
                       },
                     ),
-//                      child: ListView.builder(
-//                          scrollDirection: Axis.horizontal,
-//                          itemCount: numbers.length, itemBuilder: (context, index) {
-//                        return Container(
-//                          width: MediaQuery.of(context).size.width * 0.6,
-//                          child: Card(
-//                            color: Colors.blue,
-//                            child: Container(
-//                              child: Center(child: Text(numbers[index].toString(), style: TextStyle(color: Colors.white, fontSize: 36.0),)),
-//                            ),
-//                          ),
-//                        );
-//                      }),
                   ),
-//                  child: Column(
-//                    children: <Widget>[
-//                      Row(
-//                        children: <Widget>[
-//                          Container(
-//                            height: 100.0,
-//                            child: Image.asset('assets/images/decision_making.png'),
-//                          ),
-//                          Container(
-//                            height: 250.0,
-//                            child: Column(
-//                              crossAxisAlignment: CrossAxisAlignment.start,
-//                              children: <Widget>[
-//                                Container(child: Text("Decision Making Section", style: TextStyle(fontSize: 22.0, fontFamily: 'Roboto', fontWeight: FontWeight.bold, height: 1.5),),),
-//                                Container(
-//                                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-//                                  height: MediaQuery.of(context).size.height * 0.35,
-//                                  child: ListView.builder(
-//                                      scrollDirection: Axis.horizontal,
-//                                      itemCount: numbers.length, itemBuilder: (context, index) {
-//                                    return Container(
-//                                      width: MediaQuery.of(context).size.width * 0.6,
-//                                      child: Card(
-//                                        color: Colors.blue,
-//                                        child: Container(
-//                                          child: Center(child: Text(numbers[index].toString(), style: TextStyle(color: Colors.white, fontSize: 36.0),)),
-//                                        ),
-//                                      ),
-//                                    );
-//                                  }),
-//                                ),
-//                                Expanded(child: Text("welcomerer"),
-//                                ),
-//
-//
-//                              ],
-//                            ),
-//                          ),
-//                        ],
-//                      ),
-//                    ],
-//                  ),
                 ),
               ),
             ),
@@ -328,22 +308,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   }
 
-//  Future<Test> fetchTests() async {
-//
-//    //final response =await http.get('http://www.xatprep.com/api/get_tests.php');
-//    final response =await http.get('https://jsonplaceholder.typicode.com/posts');
-//    if(response.statusCode ==200){
-//      print("data received from API");
-//
-//
-//
-//      return Test.fromJson(json.decode(response.body));
-//
-//    }else{
-//      throw Exception("Some issue here. Please try to restart the application");
-//    }
-//  }
-
   Future<List<Test>> fetchTests() async {
     final response =await http.get('https://www.xatprep.com/api/get_tests.php');
     //final response = await http.get('https://jsonplaceholder.typicode.com/posts');
@@ -425,7 +389,9 @@ class _MyHomePageState extends State<MyHomePage> {
 //  }
 
 //  getListofItems(){
-//    return new FutureBuilder(
+//    return new
+//
+//    FutureBuilder(
 //        future: DefaultAssetBundle.of(context)
 //            .loadString('assets/dm_list.json'),
 //        builder: (context, snapshot) {

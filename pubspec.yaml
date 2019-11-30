@@ -53,7 +53,10 @@ flutter:
   fonts:
     - family: Roboto
       fonts:
-        - asset: fonts/Roboto-Medium.ttf
+         - asset: fonts/Roboto-Medium.ttf
+    - family: Pacifico
+      fonts:
+         - asset: fonts/Pacifico-Regular.ttf
 #        - asset: fonts/Roboto-Medium.ttf
 #        - asset: fonts/Roboto-Regular.ttf
   #  - images/a_dot_ham.jpeg
