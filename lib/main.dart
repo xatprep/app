@@ -366,82 +366,79 @@ class _MyHomePageState extends State<MyHomePage> {
       case 1:{
         return ListView(
           children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(left:0.0, bottom: 5.0),
-              child: Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0),),
-                color: Colors.white,
-                elevation: 4.0,
-                child: Padding(
-                  padding: const EdgeInsets.only(left:20.0, top:10.0),
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Container(
-                            height: 50.0,
-                            child: Image.asset('assets/images/decision_making.png'),
-                          ),
-                          Container(child: Text("Decision Making", style: TextStyle(fontSize: 22.0, fontFamily: 'Roboto'),),),
+            Card(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0),),
+              color: Colors.white,
+              elevation: 4.0,
+              child: Padding(
+                padding: const EdgeInsets.only(left:20.0, top:10.0),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Container(
+                          height: 50.0,
+                          child: Image.asset('assets/images/decision_making.png'),
+                        ),
+                        Container(child: Text("Decision Making", style: TextStyle(fontSize: 22.0, fontFamily: 'Roboto'),),),
 
-                        ],
-                      ),
-                      Container(
-                        height: 125.0,
-                        margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
-                        child: Container(
+                      ],
+                    ),
+                    Container(
+                      height: 500.0,
+                      margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
+                      child: Container(
 //                          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-                          margin: EdgeInsets.only(top: 5.0),
-                          child: FutureBuilder<List<Test>>(
-                            future: fetchTests(),
-                            builder: (context,snapshot){
-                              if(snapshot.hasData){
-                                return new ListView.builder(
-                                  itemCount:snapshot.data.length,
-                                  itemBuilder: (BuildContext context, int index){
-                                    return GestureDetector(
-                                      onTap: (){
-                                        print("welcome to Decision Making section");
-                                        onCardTapped(1);
-                                      },
-                                      child: new Container(
+                        margin: EdgeInsets.only(top: 5.0),
+                        child: FutureBuilder<List<Test>>(
+                          future: fetchTests(),
+                          builder: (context,snapshot){
+                            if(snapshot.hasData){
+                              return new ListView.builder(
+                                itemCount:snapshot.data.length,
+                                itemBuilder: (BuildContext context, int index){
+                                  return GestureDetector(
+                                    onTap: (){
+                                      print("welcome to Decision Making section");
+                                      onCardTapped(1);
+                                    },
+                                    child: new Container(
 //                                      width: MediaQuery.of(context).size.width * 0.6,
-                                        width: 150.0,
-                                        margin: EdgeInsets.all(5.0),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: Colors.blue,
-                                            border: new Border.all(
-                                              width: 2.0,
-                                              style: BorderStyle.solid,
-                                              color: Colors.white,
-                                            ),
-                                            borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
+                                      width: 150.0,
+                                      margin: EdgeInsets.all(5.0),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.blue,
+                                          border: new Border.all(
+                                            width: 2.0,
+                                            style: BorderStyle.solid,
+                                            color: Colors.white,
+                                          ),
+                                          borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
 
-                                            gradient: new LinearGradient(
-                                              colors: [Colors.lightBlueAccent, Colors.blue],
+                                          gradient: new LinearGradient(
+                                            colors: [Colors.lightBlueAccent, Colors.blue],
 //                                              begin: Alignment.centerRight,
 //                                              end: new Alignment(-1.0, -1.0)
-                                            ),
                                           ),
-                                          child: Center(child: Text(snapshot.data[index].name, style: TextStyle(fontSize: 18.0, color: Colors.white),)),
                                         ),
+                                        child: Center(child: Text(snapshot.data[index].name, style: TextStyle(fontSize: 18.0, color: Colors.white),)),
                                       ),
-                                    );
-                                  },
-                                );
-                              }else{
-                                return
-                                  Center(
-                                    child: CircularProgressIndicator(),
+                                    ),
                                   );
-                              }
-                            },
-                          ),
+                                },
+                              );
+                            }else{
+                              return
+                                Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                            }
+                          },
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
