@@ -424,38 +424,38 @@ class _MyHomePageState extends State<MyHomePage> {
 //        });
 //  }
 
-  getListofItems(){
-    return new FutureBuilder(
-        future: DefaultAssetBundle.of(context)
-            .loadString('assets/dm_list.json'),
-        builder: (context, snapshot) {
-          var db_objects = json.decode(snapshot.data.toString());
-
-          return new ListView.builder(
-            itemBuilder: (BuildContext context, int index) {
-              var db_object = db_objects[index];
-              return new Card(
-                child: new Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    new Text("Name: " + db_object['name'],
-                        style: TextStyle(
-                            fontFamily: 'Roboto', fontWeight: FontWeight.bold, fontSize: 24)),
-                    new Text("Description: " + db_object['description'],
-                        style: TextStyle(
-                            fontFamily: 'Roboto', color: Colors.blueGrey, fontWeight: FontWeight.normal, fontSize: 20)),
-                    new Text("Image: " + db_object['image'],
-                        style: TextStyle(
-                            fontFamily: 'Roboto', fontWeight: FontWeight.normal, fontSize: 20)),
-                    new Image.asset('assets/images/xat2017.png'),
-                  ],
-                ),
-              );
-            },
-            itemCount: db_objects == null ? 0 : db_objects.length,
-          );
-        });
-  }
+//  getListofItems(){
+//    return new FutureBuilder(
+//        future: DefaultAssetBundle.of(context)
+//            .loadString('assets/dm_list.json'),
+//        builder: (context, snapshot) {
+//          var db_objects = json.decode(snapshot.data.toString());
+//
+//          return new ListView.builder(
+//            itemBuilder: (BuildContext context, int index) {
+//              var db_object = db_objects[index];
+//              return new Card(
+//                child: new Column(
+//                  crossAxisAlignment: CrossAxisAlignment.stretch,
+//                  children: <Widget>[
+//                    new Text("Name: " + db_object['name'],
+//                        style: TextStyle(
+//                            fontFamily: 'Roboto', fontWeight: FontWeight.bold, fontSize: 24)),
+//                    new Text("Description: " + db_object['description'],
+//                        style: TextStyle(
+//                            fontFamily: 'Roboto', color: Colors.blueGrey, fontWeight: FontWeight.normal, fontSize: 20)),
+//                    new Text("Image: " + db_object['image'],
+//                        style: TextStyle(
+//                            fontFamily: 'Roboto', fontWeight: FontWeight.normal, fontSize: 20)),
+//                    new Image.asset('assets/images/xat2017.png'),
+//                  ],
+//                ),
+//              );
+//            },
+//            itemCount: db_objects == null ? 0 : db_objects.length,
+//          );
+//        });
+//  }
 
 
 
