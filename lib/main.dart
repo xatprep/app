@@ -13,14 +13,6 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Welcome to XATprep'),
@@ -42,12 +34,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -129,15 +115,14 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Container(
-              height: 180.0,
-              padding: EdgeInsets.all(0.0),
-              margin: EdgeInsets.only(left:0.0, bottom: 5.0),
+              height: 225.0,
+//              margin: EdgeInsets.only(left:0.0, bottom: 5.0, top: 5.0),
               child: Card(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0),),
                 color: Colors.white,
                 elevation: 4.0,
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.only(left:20.0, top:10.0),
                   child: Column(
                     children: <Widget>[
                       Row(
@@ -150,19 +135,38 @@ class _MyHomePageState extends State<MyHomePage> {
 
                         ],
                       ),
-                      Row(
-                        children: <Widget>[
-                          Center(
-                            child:Container(
-                              margin: EdgeInsets.only(top:4.0),
-                              height: 70.0,
-                              width: MediaQuery.of(context).size.width*0.8,
-                              child: Text("Focus your preparation for Decision Making and GK sections for XAT 2020 with XATprep", style: TextStyle(fontSize: 16.0, height: 1.6, fontFamily: 'Roboto', color: Colors.black),),
-                            ),
+                      Container(
+                        height: 125.0,
+                        margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
+                        child: Container(
+//                          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+                          margin: EdgeInsets.only(top: 5.0),
+                          child: FutureBuilder<List<Test>>(
+                            future: fetchTests(),
+                            builder: (context,snapshot){
+                              if(snapshot.hasData){
+                                return new ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount:snapshot.data.length,
+                                  itemBuilder: (BuildContext context, int index){
+                                    return new Container(
+//                                      width: MediaQuery.of(context).size.width * 0.6,
+                                      width: 150.0,
+                                      margin: EdgeInsets.all(5.0),
+                                      color: Colors.yellow,
+                                      child: Container(
+                                        child: Center(child: Text(snapshot.data[index].name)),
+                                      ),
+                                    );
+                                  },
+                                );
+                              }else{
+                                return CircularProgressIndicator();
+                              }
+                            },
                           ),
-
-                        ],
-                      )
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -325,105 +329,6 @@ class _MyHomePageState extends State<MyHomePage> {
       throw Exception('Failed to load post');
     }
   }
-//
-//  Future<Test> fetchTests() async {
-//    //final response =await http.get('https://www.xatprep.com/api/get_tests.php');
-//    final response = await http.get('https://jsonplaceholder.typicode.com/posts/1');
-//    print(response.body);
-//    if (response.statusCode == 200) {
-//      // If server returns an OK response, parse the JSON.
-//      return Test.fromJson(json.decode(response.body));
-//    } else {
-//      // If that response was not OK, throw an error.
-//      throw Exception('Failed to load post');
-//    }
-//  }
-
-//  displayDMCards(){
-//    FutureBuilder<Test>(
-//      future: test,
-//      builder: (context, snapshot) {
-//        if (snapshot.hasData) {
-//          return Text(snapshot.data.name);
-//        } else if (snapshot.hasError) {
-//          return Text("${snapshot.error}");
-//        }
-//
-//        // By default, show a loading spinner.
-//        return CircularProgressIndicator();
-//      },
-//    );
-//  }
-
-
-
-//  displayDMCards(){
-//    return new FutureBuilder(
-//        future: test,
-//        builder: (context, snapshot) {
-//          var db_objects = json.decode(snapshot.data.toString());
-//
-//          return new ListView.builder(
-//            scrollDirection: Axis.horizontal,
-//            itemCount: db_objects == null ? 0 : db_objects.length,
-//            itemBuilder: (BuildContext context, int index) {
-//              var db_object = db_objects[index];
-//              return new Card(
-//                child: new Column(
-//                  crossAxisAlignment: CrossAxisAlignment.stretch,
-//                  children: <Widget>[
-//                    new Text("Name: " + db_object['name'],
-//                        style: TextStyle(
-//                            fontFamily: 'Roboto', fontWeight: FontWeight.bold, fontSize: 24)),
-//                    new Text("Description: " + db_object['name'],
-//                        style: TextStyle(
-//                            fontFamily: 'Roboto', color: Colors.blueGrey, fontWeight: FontWeight.normal, fontSize: 20)),
-////                    new Image.asset('assets/images/xat2017.png'),
-//                  ],
-//                ),
-//              );
-//            },
-//
-//          );
-//        });
-//  }
-
-//  getListofItems(){
-//    return new
-//
-//    FutureBuilder(
-//        future: DefaultAssetBundle.of(context)
-//            .loadString('assets/dm_list.json'),
-//        builder: (context, snapshot) {
-//          var db_objects = json.decode(snapshot.data.toString());
-//
-//          return new ListView.builder(
-//            itemBuilder: (BuildContext context, int index) {
-//              var db_object = db_objects[index];
-//              return new Card(
-//                child: new Column(
-//                  crossAxisAlignment: CrossAxisAlignment.stretch,
-//                  children: <Widget>[
-//                    new Text("Name: " + db_object['name'],
-//                        style: TextStyle(
-//                            fontFamily: 'Roboto', fontWeight: FontWeight.bold, fontSize: 24)),
-//                    new Text("Description: " + db_object['description'],
-//                        style: TextStyle(
-//                            fontFamily: 'Roboto', color: Colors.blueGrey, fontWeight: FontWeight.normal, fontSize: 20)),
-//                    new Text("Image: " + db_object['image'],
-//                        style: TextStyle(
-//                            fontFamily: 'Roboto', fontWeight: FontWeight.normal, fontSize: 20)),
-//                    new Image.asset('assets/images/xat2017.png'),
-//                  ],
-//                ),
-//              );
-//            },
-//            itemCount: db_objects == null ? 0 : db_objects.length,
-//          );
-//        });
-//  }
-
-
 
   void onItemTapped(int index) {
     setState(() {
