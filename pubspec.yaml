@@ -55,6 +55,7 @@ flutter:
     - assets/images/gk.png
     - assets/images/forum.png
     - assets/images/dm_1.png
+    - assets/images/gk_1.png
 
   fonts:
     - family: Roboto
