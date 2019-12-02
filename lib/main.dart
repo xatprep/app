@@ -156,25 +156,54 @@ class _MyHomePageState extends State<MyHomePage> {
                                         },
                                       child: new Container(
 //                                      width: MediaQuery.of(context).size.width * 0.6,
-                                        width: 150.0,
+                                        width: 125.0,
+                                        height: 125.0,
                                         margin: EdgeInsets.all(5.0),
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            color: Colors.blue,
+                                            color: Colors.white,
                                             border: new Border.all(
-                                                width: 2.0,
+                                                width: 1.0,
                                                 style: BorderStyle.solid,
-                                                color: Colors.white,
+                                                color: Color(0xffececec),
                                             ),
                                             borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
 
-                                            gradient: new LinearGradient(
-                                                colors: [Colors.lightBlueAccent, Colors.blue],
-//                                              begin: Alignment.centerRight,
-//                                              end: new Alignment(-1.0, -1.0)
-                                                ),
+//                                            gradient: new LinearGradient(
+//                                                colors: [Colors.lightBlueAccent, Colors.blue],
+////                                              begin: Alignment.centerRight,
+////                                              end: new Alignment(-1.0, -1.0)
+//                                                ),
                                           ),
-                                          child: Center(child: Text(snapshot.data[index].name, style: TextStyle(fontSize: 18.0, color: Colors.white),)),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Expanded(
+                                                child: Container(
+                                                  decoration: new BoxDecoration(
+                                                    image: DecorationImage(
+                                                      image: new AssetImage(
+                                                          'assets/images/dm_1.png'),
+                                                      fit: BoxFit.fill,
+                                                    ),
+                                                    shape: BoxShape.rectangle,
+                                                  ),
+                                                ),
+                                              ),
+
+                                              Container(
+                                                alignment: Alignment.bottomLeft,
+                                                margin: EdgeInsets.only(left: 10.0,top: 5.0),
+                                                child: Text(snapshot.data[index].name, style: TextStyle(fontSize: 15.0, color: Colors.black)),
+                                              ),
+                                              Container(
+                                                alignment: Alignment.bottomLeft,
+                                                margin: EdgeInsets.only(left: 10.0,top: 5.0, bottom: 5.0),
+                                                child: Text("26 questions", style: TextStyle(color: Colors.blue),),
+                                              ),
+                                              Row()
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     );
@@ -399,7 +428,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 itemBuilder: (BuildContext context, int index){
                                   return GestureDetector(
                                     onTap: (){
-                                      print("welcome to Decision Making section");
+                                      print("welcome to Decision Making section1");
                                       onCardTapped(1);
                                     },
                                     child: new Container(
@@ -408,19 +437,19 @@ class _MyHomePageState extends State<MyHomePage> {
                                       margin: EdgeInsets.all(5.0),
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          color: Colors.blue,
+                                          color: Colors.white,
                                           border: new Border.all(
                                             width: 2.0,
                                             style: BorderStyle.solid,
-                                            color: Colors.white,
+                                            color: Colors.grey,
                                           ),
                                           borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
 
-                                          gradient: new LinearGradient(
-                                            colors: [Colors.lightBlueAccent, Colors.blue],
-//                                              begin: Alignment.centerRight,
-//                                              end: new Alignment(-1.0, -1.0)
-                                          ),
+//                                          gradient: new LinearGradient(
+//                                            colors: [Colors.lightBlueAccent, Colors.blue],
+////                                              begin: Alignment.centerRight,
+////                                              end: new Alignment(-1.0, -1.0)
+//                                          ),
                                         ),
                                         child: Center(child: Text(snapshot.data[index].name, style: TextStyle(fontSize: 18.0, color: Colors.white),)),
                                       ),

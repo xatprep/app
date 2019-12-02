@@ -1,4 +1,4 @@
-name: xatprep
+name: XATprep
 description: Application for XATPREP
 
 # The following defines the version and build number for your application.
@@ -27,10 +27,14 @@ dependencies:
   cupertino_icons: ^0.1.2
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.7.3"
   flutter_test:
     sdk: flutter
 
-
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -50,6 +54,7 @@ flutter:
     - assets/images/decision_making.png
     - assets/images/gk.png
     - assets/images/forum.png
+    - assets/images/dm_1.png
 
   fonts:
     - family: Roboto
