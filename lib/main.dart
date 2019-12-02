@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Row(
                         children: <Widget>[
                           Container(
-                            height: 50.0,
+                            height: 40.0,
                             child: Image.asset('assets/images/about.png'),
                           ),
                           Container(child: Text("About", style: TextStyle(fontSize: 22.0, fontFamily: 'Roboto'),),),
@@ -128,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Row(
                         children: <Widget>[
                           Container(
-                            height: 50.0,
+                            height: 40.0,
                             child: Image.asset('assets/images/decision_making.png'),
                           ),
                           Container(child: Text("Decision Making", style: TextStyle(fontSize: 22.0, fontFamily: 'Roboto'),),),
@@ -238,7 +238,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Row(
                         children: <Widget>[
                           Container(
-                            height: 50.0,
+                            height: 40.0,
                             child: Image.asset('assets/images/gk.png'),
                           ),
                           Container(child: Text("General Knowledge", style: TextStyle(fontSize: 22.0, fontFamily: 'Roboto'),),),
@@ -342,7 +342,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Row(
                         children: <Widget>[
                           Container(
-                            height: 50.0,
+                            height: 40.0,
                             child: Image.asset('assets/images/forum.png'),
                           ),
                           Container(child: Text("Forum", style: TextStyle(fontSize: 22.0, fontFamily: 'Roboto'),),),
@@ -350,7 +350,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],
                       ),
                       Container(
-                        height: 200.0,
+                        height: 170.0,
                         margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
 
                         child: Container(
