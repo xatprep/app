@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
+import 'dm_landing_page.dart';
+import 'exam_message.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,6 +17,13 @@ class MyApp extends StatelessWidget {
         // This is the theme of your application.
         primarySwatch: Colors.blue,
       ),
+//      initialRoute: '/',
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+//        '/': (context) => MyHomePage(),
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        '/second': (context) => DMLandingPage(),
+      },
       debugShowCheckedModeBanner: false,
       home: MyHomePage(title: 'Welcome to XATprep'),
     );
@@ -67,7 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    fetchTests();
+    fetchDMTests();
+    fetchGKTests();
   }
 
   getListOfDecisionMaking(){
@@ -142,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
 //                          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
                           margin: EdgeInsets.only(top: 5.0),
                           child: FutureBuilder<List<Test>>(
-                            future: fetchTests(),
+                            future: fetchDMTests(),
                             builder: (context,snapshot){
                               if(snapshot.hasData){
                                 return new ListView.builder(
@@ -252,7 +262,7 @@ class _MyHomePageState extends State<MyHomePage> {
 //                          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
                           margin: EdgeInsets.only(top: 5.0),
                           child: FutureBuilder<List<Test>>(
-                            future: fetchTests(),
+                            future: fetchGKTests(),
                             builder: (context,snapshot){
                               if(snapshot.hasData){
                                 return new ListView.builder(
@@ -357,7 +367,7 @@ class _MyHomePageState extends State<MyHomePage> {
 //                          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
                           margin: EdgeInsets.only(top: 5.0),
                           child: FutureBuilder<List<Test>>(
-                            future: fetchTests(),
+                            future: fetchDMTests(),
                             builder: (context,snapshot){
                               if(snapshot.hasData){
                                 return new ListView.builder(
@@ -451,11 +461,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        Container(
-                          height: 50.0,
-                          child: Image.asset('assets/images/decision_making.png'),
-                        ),
-                        Container(child: Text("Decision Making", style: TextStyle(fontSize: 22.0, fontFamily: 'Roboto'),),),
+                        Container(child: Text("Decision Making Section", style: TextStyle(fontSize: 22.0, fontFamily: 'Roboto'),),),
 
                       ],
                     ),
@@ -466,7 +472,7 @@ class _MyHomePageState extends State<MyHomePage> {
 //                          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
                         margin: EdgeInsets.only(top: 5.0),
                         child: FutureBuilder<List<Test>>(
-                          future: fetchTests(),
+                          future: fetchDMTests(),
                           builder: (context,snapshot){
                             if(snapshot.hasData){
                               return new ListView.builder(
@@ -477,28 +483,23 @@ class _MyHomePageState extends State<MyHomePage> {
                                       print("welcome to Decision Making section1");
                                       onCardTapped(1);
                                     },
-                                    child: new Container(
-//                                      width: MediaQuery.of(context).size.width * 0.6,
-                                      width: 150.0,
-                                      margin: EdgeInsets.all(5.0),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          border: new Border.all(
-                                            width: 2.0,
-                                            style: BorderStyle.solid,
-                                            color: Colors.grey,
-                                          ),
-                                          borderRadius: new BorderRadius.all(new Radius.circular(5.0)),
-
-//                                          gradient: new LinearGradient(
-//                                            colors: [Colors.lightBlueAccent, Colors.blue],
-////                                              begin: Alignment.centerRight,
-////                                              end: new Alignment(-1.0, -1.0)
-//                                          ),
-                                        ),
-                                        child: Center(child: Text(snapshot.data[index].name, style: TextStyle(fontSize: 18.0, color: Colors.white),)),
+                                    child: ListTile(
+                                      leading: CircleAvatar(
+                                        child: Image.asset('assets/images/decision_making.png'),
                                       ),
+                                      title: Text(snapshot.data[index].name, style: TextStyle(color: Colors.black, )),
+                                      subtitle: Text("Questions: "+snapshot.data[index].qns_count, style: TextStyle(color: Colors.blue, )),
+                                      trailing: Icon(Icons.keyboard_arrow_right),
+                                      onTap: () {
+//                                        print('horse');
+//                                        Navigator.pushNamed(context, '/second');
+                                          Navigator.push(context,
+                                          MaterialPageRoute(builder: (context)=>DMLandingPage(),
+                                          settings: RouteSettings(
+                                            arguments: ExamMessage(snapshot.data[index].id),
+                                          )));
+                                      },
+                                      selected: true,
                                     ),
                                   );
                                 },
@@ -533,8 +534,26 @@ class _MyHomePageState extends State<MyHomePage> {
 
   }
 
-  Future<List<Test>> fetchTests() async {
-    final response =await http.get('https://www.xatprep.com/api/get_tests.php');
+  Future<List<Test>> fetchGKTests() async {
+    final response =await http.get('https://www.xatprep.com/api/get_tests.php?test_type=gk');
+    //final response = await http.get('https://jsonplaceholder.typicode.com/posts');
+    print(response.body);
+    if (response.statusCode == 200) {
+      // If server returns an OK response, parse the JSON.
+      print(response.body);
+      Iterable list = json.decode(response.body);
+      var tests = new List<Test>();
+      tests = list.map((model) => Test.fromJson(model)).toList();
+
+      return tests;
+    } else {
+      // If that response was not OK, throw an error.
+      throw Exception('Failed to load post');
+    }
+  }
+
+  Future<List<Test>> fetchDMTests() async {
+    final response =await http.get('https://www.xatprep.com/api/get_tests.php?test_type=dm');
     //final response = await http.get('https://jsonplaceholder.typicode.com/posts');
     print(response.body);
     if (response.statusCode == 200) {
@@ -565,16 +584,24 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class Test {
+  final String id;
+  final String type;
   final String name;
+  final String qns_count;
 
 
-  Test({this.name});
+  Test({this.id, this.type,this.name,this.qns_count});
 
   factory Test.fromJson(Map<String, dynamic> json) {
     return Test(
+      id: json['id'],
+      type: json['type'],
       name: json['name'],
+      qns_count: json['qns_count'],
     );
   }
 }
+
+
 
 
