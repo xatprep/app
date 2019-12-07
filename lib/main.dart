@@ -496,7 +496,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           Navigator.push(context,
                                           MaterialPageRoute(builder: (context)=>DMLandingPage(),
                                           settings: RouteSettings(
-                                            arguments: ExamMessage(snapshot.data[index].id),
+                                            arguments: ExamMessage(snapshot.data[index].id, snapshot.data[index].name),
                                           )));
                                       },
                                       selected: true,

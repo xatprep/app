@@ -1,5 +1,6 @@
 class ExamMessage{
-  final String id;
+  final String tid;
+  final String name;
 
-  ExamMessage(this.id);
+  ExamMessage(this.tid, this.name);
 }
